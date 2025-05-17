@@ -80,10 +80,15 @@ class motionPath():
         upObject = cmds.textField(self.upObjectSelectionField, q=True, tx=True)
         self.createMotion(path=nurbsCurve, upVector=upObject)
 
-
     def createMotion(self, path, upVector=""):
         """ This function creates motionPath. """
         selection = cmds.ls(sl=True)
+
+        # Add attributes
+        if not cmds.attributeQuery("________", node=path, exists=True):
+            cmds.addAttr(path, ln="________", at="enum", en="----------:", k=1)
+        if not cmds.attributeQuery("moveOnPath", node=path, exists=True):
+            cmds.addAttr(path, ln="moveOnPath", sn="mop", at="float", k=1, min=0, max=1, dv=0)
 
         for i, each in enumerate(selection):
             tempLocator = cmds.spaceLocator(name=each+"_temp_loc")
@@ -105,6 +110,9 @@ class motionPath():
             cmds.parentConstraint(locator, each, mo=1)
 
             cmds.delete(disNode, tempLocator)
+
+            self.connection(path=path, minValue=uValue, motionPath=motionPath)
+
             print("motionPath have been created for: {}".format(each))
 
     def selectionJobScript(self):
@@ -137,3 +145,19 @@ class motionPath():
         cmds.scriptJob(uiDeleted=(self.window, cleanup_job), ro=True)
 
         return selection_job_id
+
+    def connection(self, path, minValue, motionPath):
+        """ This function creates a connection for the motionPath. """
+        pma=cmds.createNode("plusMinusAverage", n="{}_minCompensateSum_rmp".format(motionPath))
+        clamp = cmds.createNode("clamp", n="{}_clamp".format(motionPath))
+
+        # set data
+        cmds.setAttr("{}.maxR".format(clamp), 1)
+        cmds.setAttr("{}.input1D[0]".format(pma), minValue)
+
+        cmds.connectAttr("{}.moveOnPath".format(path), "{}.input1D[1]".format(pma))
+        cmds.connectAttr("{}.output1D".format(pma), "{}.input.inputR".format(clamp))
+        cmds.connectAttr("{}.output.outputR".format(clamp), "{}.uValue".format(motionPath))
+
+
+
