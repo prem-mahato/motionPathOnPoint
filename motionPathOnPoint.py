@@ -1,8 +1,4 @@
 """
-# Copyright (c) 2025 Prem Kumar Mahato
-# All Rights Reserved. This script is licensed for personal or commercial use by individual purchasers only.
-# Redistribution or resale of the code, in part or full, is strictly prohibited.
-
 Author: Prem Kumar Mahato
 LinkedIn: www.linkedin.com/in/premkumarmahato
 ArtStation: https://www.artstation.com/premkumarmahato8
