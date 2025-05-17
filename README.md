@@ -21,6 +21,6 @@ This is a Python tool for Autodesk Maya that creates a motion path on a point **
 filePath = "F:/Script/motionPath On Point/motionPathOnPoint.py"  # Update path as needed
 exec(open(filePath).read())
 motionPath()
-
+```
 ## Author
 Prem Kumar Mahato
