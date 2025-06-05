@@ -11,7 +11,7 @@ This is a Python tool for Autodesk Maya that creates a motion path on a point **
 ## Screenshot / Demo
 
 ![Tool Demo](Screenshot.png)
-![Tool Demo](demo.mp4)
+![Tool Demo](demo.gif)
 
 ## Usage
 
