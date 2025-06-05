@@ -8,9 +8,10 @@ This is a Python tool for Autodesk Maya that creates a motion path on a point **
 - Keeps object in place (no snap to curve start)
 - Clean and easy to use script
 
-## Screenshot
+## Screenshot / Demo
 
 ![Tool Demo](Screenshot.png)
+![Tool Demo](demo.mp4)
 
 ## Usage
 
